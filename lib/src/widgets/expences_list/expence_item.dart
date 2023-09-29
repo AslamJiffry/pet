@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet/src/enums/category_icons.dart';
 import 'package:pet/src/models/expence.dart';
 
 class ExpenceItem extends StatelessWidget {
@@ -8,7 +9,33 @@ class ExpenceItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: Text(expence.title),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16,
+        ),
+        child: Column(
+          children: [
+            Text(expence.title),
+            const SizedBox(
+              height: 4,
+            ),
+            Row(
+              children: [
+                Text('Rs:${expence.amount.toStringAsFixed(2)}'),
+                const Spacer(),
+                Row(
+                  children: [
+                    Icon(categoryICons[expence.category]),
+                    const SizedBox(width: 8),
+                    Text(expence.formattedDate),
+                  ],
+                )
+              ],
+            )
+          ],
+        ),
+      ),
     );
   }
 }

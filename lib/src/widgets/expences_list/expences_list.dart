@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet/src/models/expence.dart';
+import 'package:pet/src/widgets/expences_list/expence_item.dart';
 
 class ExpencesList extends StatelessWidget {
   const ExpencesList({super.key, required this.expences});
@@ -10,7 +11,7 @@ class ExpencesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: expences.length,
-      itemBuilder: (context, index) => Text(expences[index].title),
+      itemBuilder: (context, index) => ExpenceItem(expences[index]),
     );
   }
 }

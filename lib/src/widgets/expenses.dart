@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet/src/enums/category_enum.dart';
-import 'package:pet/src/expences_list.dart';
+import 'package:pet/src/widgets/expences_list/expences_list.dart';
 import 'package:pet/src/models/expence.dart';
 
 class Expences extends StatefulWidget {
@@ -41,6 +41,7 @@ class _ExpencesState extends State<Expences> {
     return Scaffold(
       body: Column(
         children: [
+          const Text("Chart"),
           Expanded(
             child: ExpencesList(expences: _existingExpences),
           ),

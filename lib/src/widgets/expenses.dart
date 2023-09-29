@@ -39,6 +39,15 @@ class _ExpencesState extends State<Expences> {
   @override
   Widget build(BuildContext buildContext) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text("Personal Expence Tracker"),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.add),
+          ),
+        ],
+      ),
       body: Column(
         children: [
           const Text("Chart"),

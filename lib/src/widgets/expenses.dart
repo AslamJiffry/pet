@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pet/src/enums/category_enum.dart';
+import 'package:pet/src/widgets/add_expence.dart';
 import 'package:pet/src/widgets/expences_list/expences_list.dart';
 import 'package:pet/src/models/expence.dart';
 
@@ -36,6 +37,13 @@ class _ExpencesState extends State<Expences> {
         category: Category.gift),
   ];
 
+  void _openAddExpensesOverlay() {
+    showModalBottomSheet(
+      context: context,
+      builder: (ctx) => const AddExpence(),
+    );
+  }
+
   @override
   Widget build(BuildContext buildContext) {
     return Scaffold(
@@ -43,7 +51,7 @@ class _ExpencesState extends State<Expences> {
         title: const Text("Personal Expence Tracker"),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: _openAddExpensesOverlay,
             icon: const Icon(Icons.add),
           ),
         ],

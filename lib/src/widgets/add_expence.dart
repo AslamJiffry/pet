@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:pet/src/enums/category_enum.dart';
+import 'package:pet/src/extentions/category_extension.dart';
 import 'package:pet/src/models/expence.dart';
 
 class AddExpence extends StatefulWidget {
@@ -14,6 +16,7 @@ class _AddExpenseState extends State<AddExpence> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
   DateTime? _selectedDateVar;
+  Category _selectedCategory = Category.food;
 
   @override
   void dispose() {
@@ -85,8 +88,33 @@ class _AddExpenseState extends State<AddExpence> {
               )),
             ],
           ),
+          const SizedBox(
+            height: 16,
+          ),
           Row(
             children: [
+              DropdownButton(
+                value: _selectedCategory,
+                items: Category.values
+                    .map(
+                      (category) => DropdownMenuItem(
+                        value: category,
+                        child: Text(
+                          category.categoryname,
+                        ),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) {
+                  if (value == null) {
+                    return;
+                  }
+                  setState(() {
+                    _selectedCategory = value;
+                  });
+                },
+              ),
+              const Spacer(),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);

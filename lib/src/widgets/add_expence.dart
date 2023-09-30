@@ -4,7 +4,9 @@ import 'package:pet/src/extentions/category_extension.dart';
 import 'package:pet/src/models/expence.dart';
 
 class AddExpence extends StatefulWidget {
-  const AddExpence({super.key});
+  const AddExpence({super.key, required this.onSaveExpence});
+
+  final void Function(Expence expence) onSaveExpence;
 
   @override
   State<AddExpence> createState() {
@@ -38,6 +40,38 @@ class _AddExpenseState extends State<AddExpence> {
     setState(() {
       _selectedDateVar = selectedDate;
     });
+  }
+
+  void _saveExpence() {
+    final amount = double.tryParse(_amountController.text);
+    final amountIsInvalid = amount == null || amount <= 0;
+    if (_titleController.text.trim().isEmpty ||
+        amountIsInvalid ||
+        _selectedDateVar == null) {
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Invalid Input'),
+          content: const Text('Please check entered data valid or empty!'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(ctx);
+              },
+              child: const Text('Ok'),
+            ),
+          ],
+        ),
+      );
+      return;
+    }
+    widget.onSaveExpence(
+      Expence(
+          title: _titleController.text,
+          amount: amount,
+          date: _selectedDateVar!,
+          category: _selectedCategory),
+    );
   }
 
   @override
@@ -122,10 +156,7 @@ class _AddExpenseState extends State<AddExpence> {
                 child: const Text('Cancel'),
               ),
               ElevatedButton(
-                onPressed: () {
-                  print(_titleController.text);
-                  print(_amountController.text);
-                },
+                onPressed: _saveExpence,
                 child: const Text('Save Expence'),
               )
             ],

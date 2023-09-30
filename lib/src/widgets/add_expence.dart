@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pet/src/models/expence.dart';
 
 class AddExpence extends StatefulWidget {
   const AddExpence({super.key});
@@ -12,6 +13,7 @@ class AddExpence extends StatefulWidget {
 class _AddExpenseState extends State<AddExpence> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  DateTime? _selectedDateVar;
 
   @override
   void dispose() {
@@ -20,17 +22,19 @@ class _AddExpenseState extends State<AddExpence> {
     super.dispose();
   }
 
-  void _loadDatePicker() {
+  void _loadDatePicker() async {
     final current = DateTime.now();
     final initialDate = DateTime(current.year - 1, current.month, current.day);
     final lastDate = current;
-    print('insideDatePicker');
-    showDatePicker(
+    final selectedDate = await showDatePicker(
         context: context,
         initialDate: current,
         firstDate: initialDate,
         lastDate: lastDate);
-    print('aftershowDatePicker');
+
+    setState(() {
+      _selectedDateVar = selectedDate;
+    });
   }
 
   @override
@@ -66,7 +70,11 @@ class _AddExpenseState extends State<AddExpence> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Text('Selected Date'),
+                  Text(
+                    _selectedDateVar == null
+                        ? 'No Date Selected'
+                        : formatter.format(_selectedDateVar!),
+                  ),
                   IconButton(
                     onPressed: _loadDatePicker,
                     icon: const Icon(

@@ -16,7 +16,10 @@ class ExpenceItem extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(expence.title),
+            Text(
+              expence.title,
+              style: Theme.of(context).textTheme.titleSmall,
+            ),
             const SizedBox(
               height: 4,
             ),

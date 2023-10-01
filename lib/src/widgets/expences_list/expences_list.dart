@@ -15,6 +15,13 @@ class ExpencesList extends StatelessWidget {
       itemCount: expences.length,
       itemBuilder: (context, index) => Dismissible(
         key: ValueKey(expences[index]),
+        background: Container(
+          color: Theme.of(context).colorScheme.error.withOpacity(
+                0.70,
+              ),
+          margin: EdgeInsets.symmetric(
+              horizontal: Theme.of(context).cardTheme.margin!.horizontal),
+        ),
         onDismissed: (direction) {
           onDeleteExpence(expences[index]);
         },

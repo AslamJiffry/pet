@@ -3,15 +3,23 @@ import 'package:pet/src/models/expence.dart';
 import 'package:pet/src/widgets/expences_list/expence_item.dart';
 
 class ExpencesList extends StatelessWidget {
-  const ExpencesList({super.key, required this.expences});
+  const ExpencesList(
+      {super.key, required this.expences, required this.onDeleteExpence});
 
   final List<Expence> expences;
+  final void Function(Expence expence) onDeleteExpence;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
       itemCount: expences.length,
-      itemBuilder: (context, index) => ExpenceItem(expences[index]),
+      itemBuilder: (context, index) => Dismissible(
+        key: ValueKey(expences[index]),
+        onDismissed: (direction) {
+          onDeleteExpence(expences[index]);
+        },
+        child: ExpenceItem(expences[index]),
+      ),
     );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet/src/enums/category_enum.dart';
 import 'package:pet/src/widgets/add_expence.dart';
+import 'package:pet/src/widgets/chart/chart.dart';
 import 'package:pet/src/widgets/expences_list/expences_list.dart';
 import 'package:pet/src/models/expence.dart';
 
@@ -98,7 +99,7 @@ class _ExpencesState extends State<Expences> {
       ),
       body: Column(
         children: [
-          const Text("Chart"),
+          Chart(expenses: _existingExpences),
           Expanded(
             child: mainContent,
           ),

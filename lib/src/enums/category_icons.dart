@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pet/src/enums/category_enum.dart';
 
-const categoryICons = {
+const categoryIcons = {
   Category.food: Icons.dining,
   Category.apparel: Icons.accessibility_outlined,
   Category.transport: Icons.car_rental,

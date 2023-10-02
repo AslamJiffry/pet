@@ -29,7 +29,7 @@ class ExpenceItem extends StatelessWidget {
                 const Spacer(),
                 Row(
                   children: [
-                    Icon(categoryICons[expence.category]),
+                    Icon(categoryIcons[expence.category]),
                     const SizedBox(width: 8),
                     Text(expence.formattedDate),
                   ],
